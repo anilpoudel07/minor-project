@@ -1,21 +1,16 @@
 import mongoose,{Schema } from "mongoose";
-const gpsModel  = new Schema({
-    
-
-    lattitude:{
-
+const gpsModelSchema  = new Schema({ 
+   longitude :{
         type:String,
         default:0,
         required:true, 
     },
-    lattitude:{
+    latitude:{
         type:String,
         default:0,
         required:true
-    },
-    time:{
-        type:String
     }
+    
 },{
     timestamps:true})
-export const GpsModel = new mongoose.model("gpsModel",gpsModel)
+export const GpsModel =  mongoose.model("GpsModel",gpsModelSchema)
