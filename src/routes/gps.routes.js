@@ -7,7 +7,7 @@ router.get('/gps-data', async(req, res)=>{
   {
 const gpsData = await GpsModel.find();
 console.log('Data is fetched from MongoDB', gpsData);
-res.status(200).json(gpsData);c
+res.status(200).json(gpsData);
   }catch(e)
   {
     console.error(
