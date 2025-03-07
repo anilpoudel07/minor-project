@@ -7,7 +7,7 @@ console.log('Incomeng Request Body', req.body)
    }
    const isValidLattitude = latitude >=-90 && latitude<=90
  
-   const isValidLongitude= longitude>=-90 && longitude<=90
+   const isValidLongitude= longitude>=-180 && longitude<=180
  if(!isValidLattitude||!isValidLongitude )
  {
      return res.status(400).json({message: 'Invalid Gps coordinate'})
