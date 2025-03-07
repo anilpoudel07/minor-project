@@ -9,10 +9,12 @@ router.get("/gps-data", async (req, res) => {
   try {
     const gpsData = await GpsModel.find();
     console.log("Data is fetched from MongoDB", gpsData);
+    io.emit("getData", gpsData);
+
     res.status(200).json(gpsData);
   } catch (e) {
     console.error("Error while fetching data", e);
-    res.status(500).json({ message: "Error while fetching GPS Data" });
+    res.status(500).json({ message: "Error while fetching GPS Data: ", e });
   }
 });
 
@@ -20,7 +22,7 @@ router.post("/gps-data", gpsMiddleware, async (req, res) => {
   console.log("While saving data", req.gps);
 
   const { longitude, latitude } = req.gps;
-
+  console.log(longitude, latitude);
   try {
     const newGpsData = new GpsModel({ longitude, latitude });
     const savedGpsData = await newGpsData.save();
@@ -28,7 +30,9 @@ router.post("/gps-data", gpsMiddleware, async (req, res) => {
 
     io.emit("gps-update", savedGpsData);
 
-    res.status(201).json({ message: "GPS data saved and broadcasted" });
+    res
+      .status(201)
+      .json({ message: "GPS data saved and broadcasted", savedGpsData });
   } catch (e) {
     res.status(500).json({ message: e.toString() });
   }
