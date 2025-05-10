@@ -1,11 +1,12 @@
-import {mongoose  } from "mongoose";
-const connectDB = async ()=>{
-try {
-    
-const connectionInstance =await mongoose.connect("mongodb+srv://poudelanil658:anil1234@cluster0.5c5ii.mongodb.net")
-} catch (e) {
-console.log(`Mongodb Error`,e)    
-}
-}
+import { mongoose } from "mongoose";
+const connectDB = async () => {
+  try {
+    const connectionInstance = await mongoose.connect(
+      "mongodb+srv://nabinshrestha120:123@cluster0.hhatgcd.mongodb.net/"
+    );
+  } catch (e) {
+    console.log(`Mongodb Error`, e);
+  }
+};
 
-export  default connectDB;
+export default connectDB;

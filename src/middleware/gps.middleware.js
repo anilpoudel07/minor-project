@@ -1,14 +1,15 @@
 const gpsMiddleware = (req, res, next) => {
-  const { deviceID, longitude, latitude } = req.body || {};
+  const { longitude, latitude } = req.body || {};
   console.log("Incomeng Request Body", req.body);
+
   if (latitude === undefined || longitude === undefined) {
     return res
       .status(400)
       .json({ message: "lattidue and Longitude are required" });
   }
-  if (deviceID === "") {
-    return res.status(400).json({ message: "deviceID is required" });
-  }
+  // if (deviceID === "") {
+  // return res.status(400).json({ message: "deviceID is required" });
+  // }
   const isValidLattitude = latitude >= -90 && latitude <= 90;
 
   const isValidLongitude = longitude >= -90 && longitude <= 90;
@@ -16,7 +17,11 @@ const gpsMiddleware = (req, res, next) => {
     return res.status(400).json({ message: "Invalid Gps coordinate" });
   }
 
-  req.gps = { deviceID, longitude, latitude };
+  req.gps = {
+    //  deviceID,
+    longitude,
+    latitude,
+  };
   console.log(req.gps);
   next();
 };
